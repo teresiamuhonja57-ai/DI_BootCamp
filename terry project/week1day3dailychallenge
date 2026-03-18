@@ -1,0 +1,50 @@
+word = input("Enter a word: ")
+
+letter_dict = {}
+
+for index, letter in enumerate(word):
+    if letter in letter_dict:
+        letter_dict[letter].append(index)
+    else:
+        letter_dict[letter] = [index]
+
+print(letter_dict)
+#2
+word = input("Enter a word: ")
+
+result = {}
+
+for i, letter in enumerate(word):
+    if letter not in result:
+        result[letter] = []
+    result[letter].append(i)
+
+print(result)
+ 
+ #challenge2
+items_purchase = {"Water": "$1", "Bread": "$3", "TV": "$1,000", "Fertilizer": "$20"}
+wallet = "$300"
+
+# Clean wallet (remove $ and , then convert to int)
+wallet_amount = int(wallet.replace("$", "").replace(",", ""))
+
+basket = []
+
+# Loop through items (priority order)
+for item, price in items_purchase.items():
+    # Clean price
+    clean_price = int(price.replace("$", "").replace(",", ""))
+    
+    # Check if affordable
+    if clean_price <= wallet_amount:
+        basket.append(item)
+        wallet_amount -= clean_price  # update wallet
+
+# Output result
+if not basket:
+    print("Nothing")
+else:
+    print(sorted(basket))
+    ["Bread", "Fertilizer", "Water"]
+    ["Apple", "Bananas", "Fan", "Honey", "Spoon"]
+    
