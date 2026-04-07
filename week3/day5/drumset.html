@@ -1,0 +1,45 @@
+<div class="keys">
+  <div data-key="65" class="key">
+    <kbd>A</kbd>
+    <span class="sound">clap</span>
+  </div>
+  <div data-key="83" class="key">
+    <kbd>S</kbd>
+    <span class="sound">hihat</span>
+  </div>
+  </div>
+
+<audio data-key="65" src="sounds/clap.wav"></audio>
+<audio data-key="83" src="sounds/hihat.wav"></audio>
+<script>
+function playSound(e) {
+    // Determine the key code whether from a keyboard event or a click
+    const keyCode = e.keyCode || e.currentTarget.getAttribute('data-key');
+    
+    const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${keyCode}"]`);
+
+    if (!audio) return; // Stop the function if no audio matches
+
+    // Rewind to the start so we can hit the key rapidly
+    audio.currentTime = 0; 
+    audio.play();
+
+    // Add a class for visual feedback (defined in your CSS)
+    key.classList.add('playing');
+}
+// Listen for Keyboard presses
+window.addEventListener('keydown', playSound);
+
+// Listen for Mouse clicks
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => {
+    key.addEventListener('click', playSound);
+});
+function removeTransition(e) {
+    // Only process if the transform transition has finished
+    if (e.propertyName !== 'transform') return; 
+    this.classList.remove('playing');
+}
+
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
