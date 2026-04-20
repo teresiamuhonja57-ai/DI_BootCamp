@@ -1,0 +1,26 @@
+<form id="userForm">
+    <input type="text" id="name" name="name" placeholder="Name" required>
+    <input type="text" id="lastname" name="lastname" placeholder="Last Name" required>
+    <button type="submit">Send</button>
+</form>
+
+<div id="output"></div>
+<script>
+const form = document.getElementById('userForm');
+const output = document.getElementById('output');
+
+form.addEventListener('submit', function(event) {
+    // 1. Prevent the page from reloading
+    event.preventDefault();
+
+    // 2. Retrieve data from the form
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    // 3. Convert to JSON string
+    const jsonString = JSON.stringify(data);
+
+    // 4. Append to the DOM
+    output.textContent = jsonString;
+});
+</script>
